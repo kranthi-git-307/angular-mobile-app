@@ -1,0 +1,357 @@
+.products-header {
+  background: #264c73;
+  padding-bottom: 12px;   /* reduced from 12px */
+
+  ion-toolbar {
+    --background: #264c73;
+    --color: #fff;
+    --padding-start: 0px;
+  }
+
+  ion-title {
+    padding-left: 0;
+    margin-left: -6px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+}
+
+.product-tabs{
+ display: flex;
+  gap: 10px;
+  padding: 0 8px 6px;   /* 🔥 remove top padding */
+  margin-top: -4px;     /* 🔥 pull it up slightly */
+  
+}
+
+.product-tabs ion-chip{
+  --background: #e4e4e4;
+  --color: #000000;
+  border-radius: 10px;   /* makes rectangular shape */
+  height: 40px;
+  font-size: 16px;
+  padding: 10px 14px;
+}
+
+
+.product-tabs ion-chip.active{
+  background:#264c73;
+  color:#fff;
+}
+
+.product-tabs ion-chip::part(native) {
+  border-radius: 6px;
+}
+.search-wrapper {
+  margin: 10px 10px;
+  background: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 2px 12px;
+  gap: 10px;
+ 
+  input {
+    flex: 1;
+  border: none;
+  background: transparent;
+  color: #3b3b3b;
+  font-size: 18px;          /* bigger text */
+  font-weight: 400;         /* normal (not bold) */
+  outline: none;
+  letter-spacing: 0px;
+  }
+
+  ion-icon {
+    color: #3b3b3b;
+    font-size: 25px;          /* slightly bigger */
+    opacity: 0.75; 
+  }
+}
+
+/* Placeholder */
+.search-wrapper input::placeholder {
+  color: #3b3b3b;
+  opacity: 0.55;            /* lighter than text */
+  font-weight: 400;
+  font-size: 17px; 
+}
+
+.products-content {
+  padding-top: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  background: #f6f6f6;
+}
+
+.sort-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+}
+
+.product-top {
+  display: flex;
+  gap: 12px;
+
+  img {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .stock {
+    color: green;
+    font-size: 15px;
+
+    &.out {
+      color: red;
+    }
+  }
+
+  p {
+    font-size: 13px;
+    color: #666;
+  }
+}
+
+.product-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 15px;
+  color: #373535;
+}
+
+.badges {
+  display: flex;
+  gap: 10px;
+
+  .type {
+    background: #ebebeb;
+    padding: 6px 6px;
+    border-radius: 6px;
+    color: #585858;
+    font-size: 14px;
+    font-weight:600;
+  }
+
+  .status {
+    background: #e8ffef;
+    color: #1ba629;
+    padding: 6px 6px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight:600;
+
+    &.publish {
+      background: #e8ffef;
+    }
+  }
+}
+
+ion-footer {
+  ion-segment {
+    --background: #fff;
+  }
+}
+//////////////////////////////////////////////////////////////
+.price-text {
+  font-size: 14px;
+  margin: 2px 0;
+   margin: 6px 0;
+}
+
+/* Label style */
+.price-label {
+  font-weight: 400;
+  color: #5f6373;   // lighter label
+  margin-right: 4px;
+}
+
+/* Value style */
+.price-value {
+  font-weight: 600;
+  color: #323641;   // highlight value (your theme color)
+}
+
+/* Product title spacing */
+.product-top .product-name {
+  margin: 0 0 5px 0;   /* space below product name */
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.product-top img {
+  width: 110px;          /* square size */
+  height: 110px;         /* same as width */
+  border-radius: 10px;
+  object-fit: cover;    /* crop nicely */
+  flex-shrink: 0;       /* prevents shrinking */
+  background: #f2f2f2;  /* optional placeholder bg */
+}
+
+/* Base segment layout */
+ion-footer ion-segment {
+  padding: 6px 4px;
+}
+
+/* Segment buttons – tighter spacing */
+ion-footer ion-segment-button {
+  padding: 4px 6px;     /* 👈 reduce inner padding */
+  margin: 0 4px;        /* 👈 reduce gap between tabs */
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  min-width: unset;
+}
+
+/* Extra-tight spacing only for first two tabs */
+ion-footer ion-segment-button:nth-child(1),
+ion-footer ion-segment-button:nth-child(2) {
+  margin-right: 2px;    /* 👈 tighter gap between ALL & INSTOCK */
+}
+
+
+
+.add-icon {
+  font-size: 28px !important; // increase as needed (32px, 36px, etc.)
+}
+
+///////page loading state///////
+
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  color: #666;
+}
+
+.loader-wrapper ion-spinner {
+  width: 40px;
+  height: 40px;
+}
+
+.loader-wrapper p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/////////////////////////////////////////////
+
+/* iOS ONLY - Orders Header Fix */
+:host-context(.ios) .products-header ion-toolbar {
+  display: flex;
+  align-items: center;
+}
+
+/* Fix back button spacing */
+:host-context(.ios) .products-header ion-buttons[slot="start"] {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Remove iOS default title centering */
+:host-context(.ios) .products-header ion-title {
+  position: static !important;
+  transform: none !important;
+  text-align: left;
+  padding-left: 0;
+  margin-left: 2px;   /* 👈 same 2px spacing */
+  flex: 1;
+}
+
+/* Reduce back button padding */
+:host-context(.ios) .products-header ion-back-button {
+  --padding-start: 0px;
+  margin-left: 2px;
+}
+
+/* Hide "Back" text */
+:host-context(.ios) ion-back-button::part(text) {
+  display: none;
+}
+
+/* iOS Back Button Touch Area Fix */
+:host-context(.ios) .products-header ion-back-button::part(native) {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  padding: 0 !important;   /* 🔥 important */
+}
+
+/* Increase clickable area */
+:host-context(.ios) .products-header ion-back-button {
+  --padding-start: 6px;
+  --padding-end: 6px;
+  margin-left: 14px;
+  margin-right: 8px;
+}
+
+/* Optional: bigger icon */
+:host-context(.ios) .products-header ion-back-button::part(icon) {
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: translateX(0px); /* reset iOS shift */
+  font-size: 20px;
+}
+
+/* iOS ONLY - Add Button Circle */
+:host-context(.ios) .products-header ion-buttons[slot="end"] ion-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  margin-right: 10px; /* spacing from right edge */
+}
+
+/* Remove extra padding */
+:host-context(.ios) .products-header ion-buttons[slot="end"] ion-button::part(native) {
+  padding: 0 !important;
+}
+
+/* Center icon perfectly */
+:host-context(.ios) .products-header ion-buttons[slot="end"] ion-icon {
+  font-size: 22px;
+}
+
+:host-context(.ios) .products-header .search-wrapper {
+  border-radius: 48px;
+  padding: 4px 14px;   /* 👈 top/bottom reduced */
+  margin-left: 12px;
+  margin-right: 12px;
+}

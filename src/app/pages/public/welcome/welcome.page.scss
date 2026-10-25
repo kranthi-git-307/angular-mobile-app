@@ -1,0 +1,209 @@
+@import 'swiper/css/bundle';
+
+/* --------------------------------
+   BACKGROUND
+-------------------------------- */
+
+ion-content {
+  --background: #f4f6f9;   /* light clean background */
+  --padding-bottom: 140px;
+}
+
+/* --------------------------------
+   SWIPER
+-------------------------------- */
+
+.welcome-swiper {
+  height: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --------------------------------
+   SLIDE CONTENT
+-------------------------------- */
+
+.slide {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  padding-top: 40px;
+}
+
+/* --------------------------------
+   IMAGE (ZOOMED + MOVED UP)
+-------------------------------- */
+
+.slide-image {
+  width: 520px;     /* zoom image */
+  max-width: 95%;
+  margin-top: -40px;  /* move up */
+  margin-bottom: 20px;
+}
+
+/* --------------------------------
+   DOTS (MOVED UP COMPLETELY)
+-------------------------------- */
+
+.swiper-pagination {
+  position: absolute !important;
+  top: 75%;    /* move dots up */
+  left: 0;
+  width: 100%;
+}
+
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  margin: 0 5px !important;
+  background: #b0b8c1;
+  opacity: 1;
+  border-radius: 50%;
+}
+
+.swiper-pagination-bullet-active {
+  width: 20px;
+  border-radius: 12px;
+  background: #264c73;
+}
+
+/* --------------------------------
+   TEXT
+-------------------------------- */
+
+.swiper-slide:first-child h2 {
+  margin-top: 90px;   /* pushes title down */
+}
+
+.swiper-slide:first-child p {
+  margin-top: 10px;
+}
+
+
+.slide h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 30px;
+  margin-bottom: 8px;
+  // color: #ffffff !important;
+}
+
+.slide p {
+  font-size: 14px;
+  // color: #ffffff !important;
+}
+
+/* --------------------------------
+   FOOTER FIX (NO LINE)
+-------------------------------- */
+
+ion-footer {
+  --background: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-top: none !important;
+}
+
+ion-footer::before {
+  display: none !important;   /* removes that line */
+}
+
+/* --------------------------------
+   SKIP + NEXT ALIGNMENT
+-------------------------------- */
+
+.welcome-footer {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+  padding: 0 24px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Skip button */
+
+.skip-btn {
+  font-size: 16px;
+  font-weight: 500;
+  color: #393939;
+}
+
+/* Next arrow button */
+
+.next-btn {
+  width: 52px;
+  height: 52px;
+  background: #264c73;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 22px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+.next-btn:active {
+  transform: scale(0.95);
+}
+
+/* --------------------------------
+   GET STARTED BUTTON
+-------------------------------- */
+
+.get-started-btn {
+  --background: #264c73;
+  --background-hover: #264c73;
+  --background-activated: #264c73;
+
+  --border-radius: 14px;
+  font-size:18px;
+
+  height: 50px;
+  font-weight: 600;
+  width:90%;
+  
+
+  margin: 20px 16px;
+
+  text-transform: none !important;
+}
+:host-context(.dark-bg) .swiper-slide h2,
+:host-context(.dark-bg) .swiper-slide p,
+:host-context(.dark-bg) .skip-btn {
+  color: #ffffff !important;
+}
+
+:host-context(.light-bg) .swiper-slide h2,
+:host-context(.light-bg) .swiper-slide p,
+:host-context(.light-bg) .skip-btn {
+  color: #111111 !important;
+}
+
+
+/* LIGHT BACKGROUND */
+.light-bg .slide h2,
+.light-bg .slide p,
+.light-bg .skip-btn {
+  color: #111;
+}
+
+/* DARK BACKGROUND */
+.dark-bg .slide h2,
+.dark-bg .slide p,
+.dark-bg .skip-btn {
+  color: #ffffff;
+}

@@ -1,0 +1,532 @@
+/* ================= HEADER ================= */
+
+.dark-toolbar {
+  background: #264c73;
+  padding-bottom: 12px;
+
+  ion-toolbar {
+    --background: #264c73;
+    --color: #ffffff;
+    --padding-start: 0px; 
+  }
+
+  ion-title {
+    padding-left: 0;
+    margin-left: -6px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+}
+
+.dark-toolbar.edit-header {
+  padding-bottom: 0px !important;
+}
+
+.edit-header ion-title {
+  font-size: 20px;     /* 👈 same as Add */
+  font-weight: 500;    /* 👈 same as Add */
+}
+
+.edit-header ion-toolbar {
+  --min-height: 56px;  /* 👈 match height */
+}
+
+/* Make entire header area navy */
+ion-header.dark-toolbar {
+  background: #264c73;
+}
+
+
+.search-wrapper {
+  margin: 10px 10px;
+  background: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 8px 18px;
+  gap: 10px;
+
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.search-wrapper ion-icon {
+  color: #3b3b3b;
+  font-size: 25px;          /* slightly bigger */
+  opacity: 0.75;   
+}
+
+.search-wrapper input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #3b3b3b;
+  font-size: 18px;          /* bigger text */
+  font-weight: 400;         /* normal (not bold) */
+  outline: none;
+  letter-spacing: 0px;
+}
+
+.search-wrapper input::placeholder {
+  color: #3b3b3b;
+  opacity: 0.55;            /* lighter than text */
+  font-weight: 400;
+  font-size: 17px; 
+}
+
+.dark-toolbar ion-icon[name="add-outline"] {
+  font-size: 28px !important;   /* increase size */
+}
+
+
+/* ================= PAGE BACKGROUND ================= */
+
+.employees-content {
+  --background: #f6f6f6;
+}
+
+/* ================= LIST HEADING ================= */
+
+.list-heading {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 12px 16px;
+  color: #333;
+}
+
+/* ================= CARD ================= */
+
+.employee-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  margin: 6px 10px;   /* 👈 reduce spacing here */
+  position: relative;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+/* Bottom colored border */
+.card-color-0 { border-bottom: 4px solid #d1c876; }
+.card-color-1 { border-bottom: 4px solid #de667c; }
+.card-color-2 { border-bottom: 4px solid #6ac2c3; }
+.card-color-3 { border-bottom: 4px solid #db8366; }
+.card-color-4 { border-bottom: 4px solid #66a8de; }
+
+/* ================= ROLE LABEL ================= */
+
+.role-label {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+/* Role text color matches border */
+.card-color-0 .role-label { color: #d1c876; }
+.card-color-1 .role-label { color: #de667c; }
+.card-color-2 .role-label { color: #6ac2c3; }
+.card-color-3 .role-label { color: #db8366; }
+.card-color-4 .role-label { color: #66a8de; }
+
+/* ================= CARD CONTENT ================= */
+
+.card-content {
+  display: flex;
+  align-items: center;
+}
+
+/* ================= AVATAR ================= */
+
+.avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 18px;
+  color: #ffffff;
+}
+
+/* Avatar background colors */
+.avatar-0 { background: #d1c876; }
+.avatar-1 { background: #de667c; }
+.avatar-2 { background: #6ac2c3; }
+.avatar-3 { background: #db8366; }
+.avatar-4 { background: #66a8de; }
+
+.avatar ion-icon {
+  font-size: 26px;
+}
+
+/* ================= TEXT ================= */
+
+.details .name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 6px;
+
+  max-width: 12ch;        /* limits to ~12 characters */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.details .login-id {
+  font-size: 16px;
+  font-weight: 500;
+  color: #696969;
+  
+}
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+.employee-card {
+  width: 100%;
+}
+ion-list {
+  padding: 4px 8px;   /* small outer spacing */
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --min-height: auto;
+}
+
+ion-item-sliding {
+  margin-bottom: 3px;   /* 👈 small gap */
+}
+
+// .employee-card {
+//   margin: 0;
+//   width: 100%;
+// }
+
+.swipe-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #6b7280;
+  margin: 4px 16px 12px 16px;
+}
+
+/* ================= EDIT SCREEN ================= */
+
+
+
+/* FORM CONTAINER */
+
+.edit-popup {
+  padding: 4px 16px 40px;   /* 👈 reduce from 20px → 8px */
+
+}
+
+/* FORM FIELD */
+
+.form-field {
+  background: #e4e8ee;
+  border-radius: 10px;
+  padding: 8px 12px;   /* 👈 reduce from 12px → 8px */
+  width: 100%;
+  margin: 6px auto;
+}
+
+/* LABEL */
+
+ion-label[position="stacked"] {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+
+  margin-top: 6px;
+  margin-bottom: 6px;
+   padding-left: 10px;
+}
+
+
+
+
+.form-buttons {
+  padding: 12px 16px 20px;
+  background: #f5f7fa;
+}
+/* INPUT */
+
+.form-field ion-input,
+.form-field ion-select {
+  font-size: 13px;        /* 👈 slightly smaller text */
+  min-height: 30px;       /* 👈 control height */
+}
+
+/* BUTTONS */
+
+.form-buttons {
+  margin-top: 50px;   /* 👈 increase from 30px */
+  padding-bottom: 20px;
+}
+
+.form-buttons ion-button {
+  margin-top: 10px;
+}
+
+.form-buttons ion-button[color="danger"] {
+  margin-top: 16px;
+  --border-radius: 12px;
+  border-radius: 12px;
+  height: 50px;
+}
+/* Common button style (ALL buttons same) */
+
+.save-btn{
+  --background: #264c73;
+  --background-hover: #264c73;
+  --background-activated: #264c73;
+  --border-radius: 14px;
+
+ margin-top: 30px;
+ margin-bottom: 20px;
+ font-size:18px;
+ font-weight: 700px;
+
+  text-transform: none !important;
+  width:100%;
+  height: 50px;
+}
+
+/* Delete button override */
+.delete-btn {
+  --background: transparent;
+  --color: #e53935;
+  --border-radius: 14px;
+  font-size:18px;
+  font-weight: 700px;
+  width:100%;
+  height: 50px;
+  margin-bottom: 20px;
+  text-transform: none !important;
+}
+.edit-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f5f7fa;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+}
+.edit-content {
+  --background: #f5f7fa;
+  padding: 4px 16px 12px;
+  -webkit-overflow-scrolling: touch;
+}
+// .details .login-id {
+//   font-size: 16px;   /* decrease size */
+//   color: #888;
+//   margin-bottom: 7px;
+// }
+
+.details .login-id .pin-number {
+  color: #252525;
+  font-weight: 500;
+  margin-bottom: 5px;
+  font-size: 16px;   /* same or slightly bigger if needed */
+}
+.avatar-icon {
+  width: 28px;   /* increase this */
+  height: 28px;
+}
+
+.error-text {
+  color: #ef5350; /* soft red */
+  font-size: 14px;
+  margin: 4px 12px 8px;
+  display: block;
+}
+
+///////page loading state///////
+
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  color: #666;
+}
+
+.loader-wrapper ion-spinner {
+  width: 40px;
+  height: 40px;
+}
+
+.loader-wrapper p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/////////////////////////////////////////////
+
+/* ================= iOS HEADER FIX ================= */
+
+:host-context(.ios) .dark-toolbar ion-toolbar {
+  --padding-start: 0 !important;
+  --padding-end: 0 !important;
+  display: flex;
+  align-items: center;
+}
+
+/* Remove space before back button */
+// :host-context(.ios) .dark-toolbar ion-buttons[slot="start"] {
+//   margin: 0 !important;
+//   padding: 0 !important;
+// }
+
+/* FORCE spacing for edit back button */
+:host-context(.ios) .edit-header ion-buttons[slot="start"] {
+  margin-left: 12px !important;
+  margin-right: 10px !important;
+}
+/* Back icon spacing fix */
+:host-context(.ios) .dark-toolbar ion-button {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Remove iOS center title */
+:host-context(.ios) .dark-toolbar ion-title {
+  position: static !important;
+  transform: none !important;
+  text-align: left !important;
+  padding-left: 0 !important;
+  margin-left: 4px !important; /* small clean gap */
+}
+
+/* Remove "Back" text */
+:host-context(.ios) ion-back-button::part(text) {
+  display: none;
+}
+
+:host-context(.ios) .edit-header ion-buttons[slot="start"] {
+  min-width: auto !important;
+  width: auto !important;
+}
+
+:host-context(.ios) .edit-header ion-button {
+  --padding-start: 0 !important;
+  --padding-end: 0 !important;
+  min-width: 0 !important;
+}
+
+/* iOS Back Button Touch Area Fix */
+:host-context(.ios) .dark-toolbar ion-back-button::part(native) {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  padding: 0 !important;   /* 🔥 important */
+}
+
+/* Increase clickable area */
+:host-context(.ios) .dark-toolbar ion-back-button {
+  --padding-start: 6px;
+  --padding-end: 6px;
+  margin-left: 14px;
+  margin-right: 8px;
+}
+
+/* Optional: bigger icon */
+:host-context(.ios) .dark-toolbar ion-back-button::part(icon) {
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: translateX(0px); /* reset iOS shift */
+  font-size: 20px;
+}
+
+/* iOS ONLY - Add Button Circle */
+:host-context(.ios) .dark-toolbar ion-buttons[slot="end"] ion-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  margin-right: 20px; /* spacing from right edge */
+}
+
+/* Remove extra padding */
+:host-context(.ios) .dark-toolbar ion-buttons[slot="end"] ion-button::part(native) {
+  padding: 0 !important;
+}
+
+/* Center icon perfectly */
+:host-context(.ios) .dark-toolbar ion-buttons[slot="end"] ion-icon {
+  font-size: 22px;
+}
+
+:host-context(.ios) .dark-toolbar .search-wrapper {
+  border-radius: 48px;
+  padding: 4px 14px;   /* 👈 top/bottom reduced */
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+/* container spacing */
+:host-context(.ios) .dark-toolbar ion-buttons[slot="end"] {
+  margin-right: 12px;
+}
+
+/* button styling */
+:host-context(.ios) .dark-toolbar ion-buttons[slot="end"] ion-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  padding: 0 !important;
+}
+ 
+/* iOS ONLY - Edit screen back button circle */
+:host-context(.ios) .edit-header ion-button.back-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255,255,255,0.15);
+
+}
+
+/* FIX: give space to container */
+:host-context(.ios) .edit-header ion-buttons[slot="start"] {
+  margin-left: 12px;
+}
+
+/* remove default padding */
+:host-context(.ios) .edit-header ion-button.back-btn::part(native) {
+  padding: 0 !important;
+}
+
+/* center icon */
+:host-context(.ios) .edit-header ion-button.back-btn ion-icon {
+  font-size: 20px;
+}

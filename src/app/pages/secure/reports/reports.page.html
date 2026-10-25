@@ -1,0 +1,208 @@
+<ion-header class="products-header">
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Reports</ion-title>
+
+    <!-- Dropdown on right -->
+    <ion-buttons slot="end">
+      <ion-select
+        interface="popover"
+        [(ngModel)]="activeTab"
+        (ionChange)="onTabChange($event)"
+        class="report-dropdown">
+
+        <ion-select-option value="sales">Sales</ion-select-option>
+        <ion-select-option value="shift">Emp Sales</ion-select-option>
+
+      </ion-select>
+
+      <ion-icon name="chevron-down-outline" class="dropdown-arrow"></ion-icon>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="reports-content">
+
+  <!-- SALES FILTER (Daily / Weekly / Monthly) -->
+  <div *ngIf="activeTab === 'sales'" class="sales-filter">
+
+  <ion-segment
+    [(ngModel)]="salesFilter"
+    (ionChange)="loadSales()"
+    class="pill-segment">
+
+    <ion-segment-button value="daily">
+      <ion-label>Daily</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="weekly">
+      <ion-label>Weekly</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="monthly">
+      <ion-label>Monthly</ion-label>
+    </ion-segment-button>
+
+  </ion-segment>
+
+</div>
+
+
+  <!-- SALES REPORT -->
+  <ng-container *ngIf="activeTab === 'sales'">
+
+    <!-- Total Sales -->
+    <ion-card class="summary-card1">
+      <ion-card-content>
+        <h3>Total Sales</h3>
+        <h1>$ {{ sales?.total_sales || 0 | number:'1.2-2' }}</h1>
+      </ion-card-content>
+    </ion-card>
+
+
+    <!-- Sales Chart -->
+    <ion-card>
+      <ion-card-header class="chart-header">
+        <div class="header-row">
+          <ion-card-title>Sales Chart</ion-card-title>
+
+          <div class="month-indicator">
+            <span class="dot"></span>
+            <span class="month-text">{{ currentMonth }}</span>
+          </div>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="chart-container">
+          <canvas #salesChart></canvas>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+
+    <!-- Orders Chart -->
+    <ion-card>
+      <ion-card-header class="chart-header">
+        <div class="header-row">
+          <ion-card-title>Orders Chart</ion-card-title>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="chart-container">
+          <canvas #ordersChart></canvas>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+  </ng-container>
+
+
+  <!-- SALES PER EMPLOYEE -->
+  <ng-container *ngIf="activeTab === 'shift'">
+
+    <!-- Date Picker -->
+    <ion-item lines="none" class="date-input">
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+
+      <ion-input
+        type="date"
+        [(ngModel)]="date"
+        (ionChange)="onDateChange($event)">
+      </ion-input>
+
+    </ion-item>
+
+
+    <!-- Summary -->
+    <ion-card class="summary-card">
+      <ion-card-content>
+        <h3>Total Sales</h3>
+        <h1>$ {{ shiftData?.total_sales || 0 | number:'1.2-2' }}</h1>
+        <p>Total Orders: {{ shiftData?.total_orders || 0 }}</p>
+      </ion-card-content>
+    </ion-card>
+
+
+    <!-- Sales Per Employee Chart -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Sales Per Employee</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="chart-container">
+
+          <canvas
+            *ngIf="shiftData?.shifts?.length > 0"
+            #shiftSalesChart>
+          </canvas>
+
+          <div class="no-data" *ngIf="isFutureDate(date)">
+            📅 Future dates cannot have sales
+          </div>
+
+          <div class="no-data" *ngIf="!isFutureDate(date) && shiftData?.shifts?.length === 0">
+            🚫 No sales data for this date
+          </div>
+
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+
+    <!-- Orders Per Employee Chart -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Orders Per Employee</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="chart-container">
+
+          <canvas
+            *ngIf="shiftData?.shifts?.length > 0"
+            #shiftOrdersChart>
+          </canvas>
+
+          <div class="no-data" *ngIf="isFutureDate(date)">
+            📅 Future dates cannot have orders
+          </div>
+
+          <div class="no-data" *ngIf="!isFutureDate(date) && shiftData?.shifts?.length === 0">
+            🚫 No orders for this date
+          </div>
+
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+  </ng-container>
+
+
+  <!-- INVENTORY (if used later) -->
+  <ng-container *ngIf="activeTab === 'inventory'">
+
+    <ion-list>
+      <ion-item *ngFor="let p of inventory">
+        <ion-label>
+          <strong>{{ p.product }}</strong>
+          <p>
+            Opening: {{ p.opening }} |
+            Sold: {{ p.sold }} |
+            Remaining: {{ p.remaining }}
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+  </ng-container>
+
+</ion-content>

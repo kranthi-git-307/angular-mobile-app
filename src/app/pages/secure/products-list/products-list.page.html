@@ -1,0 +1,164 @@
+<ion-header class="products-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Products</ion-title>
+
+    <ion-buttons slot="end">
+      <!-- Filter icon (same as Orders) -->
+      <!-- <ion-button fill="clear" (click)="openProductFilters()">
+        <ion-icon name="funnel-outline"></ion-icon>
+      </ion-button> -->
+
+      <!-- Add product -->
+      <ion-button fill="clear" [routerLink]="['/products/add']">
+        <ion-icon name="add-outline" class="add-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+ 
+  <div class="search-wrapper">
+  <ion-icon name="search-outline"></ion-icon>
+
+  <ion-input
+    placeholder="Search products..."
+    [(ngModel)]="searchTerm"
+    (ionChange)="onSearchChange()"
+  ></ion-input>
+
+  
+</div>
+</ion-header>
+
+
+<ion-content class="products-content ion-padding">
+
+    <!-- LOADING -->
+<div *ngIf="loading && products.length === 0" class="loader-wrapper">
+  <ion-spinner name="crescent"></ion-spinner>
+</div>
+<div class="product-tabs" *ngIf="!(loading && products.length === 0)">
+  <ion-chip
+    class="tab"
+    [class.active]="stockFilter === 'all'"
+    (click)="setStockFilter('all')"
+  >
+    All
+  </ion-chip>
+
+  <ion-chip
+    class="tab"
+    [class.active]="stockFilter === 'instock'"
+    (click)="setStockFilter('instock')"
+  >
+    Instock
+  </ion-chip>
+
+  <ion-chip
+    class="tab"
+    [class.active]="stockFilter === 'outofstock'"
+    (click)="setStockFilter('outofstock')"
+  >
+    Out of stock
+  </ion-chip>
+
+</div>
+  <!-- Sort -->
+  <div class="sort-row" *ngIf="!(loading && products.length === 0)">
+    <ion-icon name="swap-vertical-outline"></ion-icon>
+    <span>Sort by:</span>
+    <strong>Newest first</strong>
+  </div>
+
+  <!-- Product Card -->
+  <div
+    class="product-card"
+    *ngFor="let product of products; trackBy: trackById" (click)="openProductDetails(product.id)"
+  >
+
+    <div class="product-top">
+      <img
+        [src]="product.images?.[0]?.src || 'assets/img/placeholder.png'"
+      />
+
+      <div class="product-info">
+        <h3 class="product-name">{{ product.name }}</h3>
+
+  <h6 class="price-text">
+    <span class="price-label">Regular Price:</span>
+    <span class="price-value">
+      {{ (product?.regular_price || product?.price || 0) | currency }}
+    </span>
+  </h6>
+
+  <h6 class="price-text">
+    <span class="price-label">Sale Price:</span>
+    <span class="price-value">
+      {{ (product?.sale_price || 0) | currency }}
+    </span>
+  </h6>
+
+        <!-- <span
+          class="stock"
+          [class.out]="product.stock_status !== 'instock'"
+        >
+          {{ product.stock_status }}
+        </span> -->
+
+        <span class="stock in" *ngIf="product.stock_status === 'instock'">
+          In Stock
+        </span>
+
+        <span class="stock out" *ngIf="product.stock_status === 'outofstock'">
+          Out of Stock
+        </span>
+
+        <!-- <span class="stock backorder" *ngIf="product.stock_status === 'onbackorder'">
+          Back Order
+        </span> -->
+
+        
+      </div>
+    </div>
+
+    <div class="product-bottom">
+      <span>#{{ product.id }}</span>
+
+      <div class="badges">
+        <span class="type">{{ product.type }}</span>
+        <span
+          class="status"
+          [class.publish]="product.status === 'publish'"
+        >
+          {{ product.status }}
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+  <ion-infinite-scroll
+      threshold="100px"
+      (ionInfinite)="loadProducts($event)"
+    >
+      <ion-infinite-scroll-content
+        loadingSpinner="crescent"
+        loadingText="Loading more orders..."
+      >
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
+<!-- Bottom Tabs -->
+<!-- <ion-footer>
+  <ion-segment
+    value="all"
+    (ionChange)="onStockFilter($event)"
+  >
+    <ion-segment-button value="all">All</ion-segment-button>
+    <ion-segment-button value="instock">Instock</ion-segment-button>
+    <ion-segment-button value="outofstock">Out of stock</ion-segment-button>
+    <ion-segment-button value="onbackorder">Back order</ion-segment-button>
+  </ion-segment>
+</ion-footer> -->

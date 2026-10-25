@@ -1,0 +1,552 @@
+<ion-header>
+  <ion-toolbar class="dark-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      {{ isEdit ? 'Edit product' : 'Add product' }}
+    </ion-title>
+
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="pageReady" [class.scanner-active]="isScanning">
+  <ion-card class="settings-card image-block">
+  <!-- Hidden file input -->
+  <input
+    type="file"
+    #fileInput
+    hidden
+    accept="image/*"
+    (change)="onFileSelected($event)"
+  />
+
+  <!-- Image / Placeholder -->
+  <div class="image-box" (click)="pickProductImage(fileInput)">
+    <ng-container *ngIf="imagePreview; else emptyState">
+      <img [src]="imagePreview" />
+    </ng-container>
+
+    <ng-template #emptyState>
+      <div class="image-placeholder">
+        <ion-icon name="image-outline"></ion-icon>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- Delete -->
+  <div
+    *ngIf="imagePreview"
+    class="delete-photo"
+    (click)="removeImage(); $event.stopPropagation()"
+  >
+    <ion-icon name="trash-outline"></ion-icon>
+  </div>
+
+</ion-card>
+<ion-card class="settings-card">
+  <ion-item lines="full">
+    <ion-label>Status</ion-label>
+    <ion-select [(ngModel)]="product.status" interface="popover">
+      <ion-select-option value="publish">Publish</ion-select-option>
+      <ion-select-option value="draft">Draft</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Featured -->
+  <!-- <ion-item lines="full">
+    <ion-label>Featured</ion-label>
+    <ion-toggle slot="end" [(ngModel)]="product.featured"></ion-toggle>
+  </ion-item> -->
+
+  <!-- SKU -->
+  <!-- <ion-item lines="none" class="editable-item">
+    <ion-label position="stacked">SKU</ion-label>
+
+    <ion-textarea
+      [(ngModel)]="product.sku"
+      placeholder="Enter SKU"
+      auto-grow="true"
+      rows="1"
+    ></ion-textarea>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="scanSku()">
+        <ion-icon name="barcode-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item> -->
+  <!-- <ion-card> -->
+    <ion-item lines="full">
+      <ion-label position="stacked">SKU</ion-label>
+      <ion-input [(ngModel)]="product.sku"></ion-input>
+      <!-- <ion-icon name="barcode-outline" slot="end"></ion-icon> -->
+      <ion-button
+        size="small"
+        slot="end"
+        [disabled]="isScanning"
+        (click)="scanSku()"
+      >
+        {{ isScanning ? 'Scanning...' : 'Scan' }}
+      </ion-button>
+    </ion-item>
+  <!-- </ion-card> -->
+
+</ion-card>
+
+
+  <ion-card class="settings-card">
+
+    <!-- TITLE -->
+<ion-item lines="full" class="editable-item">
+  <ion-label position="stacked">
+    Title
+  </ion-label>
+
+  <!-- Display text -->
+  <div
+  class="value-text"
+  *ngIf="!editTitle"
+  (click)="enableTitleEdit()"
+>
+  {{ product.name || 'Product name' }}
+</div>
+
+  <!-- Input -->
+  <ion-input
+  *ngIf="editTitle"
+  #titleInput
+  [(ngModel)]="product.name"
+  placeholder="Product name"
+  (ionBlur)="editTitle = false"
+></ion-input>
+
+  
+</ion-item>
+
+
+    <!-- DESCRIPTION -->
+<ion-item lines="none" class="editable-item">
+  <ion-label position="stacked">
+    Description
+  </ion-label>
+
+  <!-- Display text -->
+  <div
+  class="value-text"
+  *ngIf="!editDescription"
+  (click)="enableDescriptionEdit()"
+>
+  {{ product.description || 'Add description' }}
+</div>
+
+<ion-textarea
+  *ngIf="editDescription"
+  #descInput
+  [(ngModel)]="product.description"
+  auto-grow="true"
+  rows="2"
+  placeholder="Add description"
+  (ionBlur)="editDescription = false"
+></ion-textarea>
+
+  
+</ion-item>
+
+
+  </ion-card>
+
+
+  
+  
+  <ion-card class="settings-card">
+
+    <!-- Header row -->
+    <!-- <ion-item lines="full"> -->
+      <!-- <ion-label class="tax-title">
+        Tax Class
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-label> -->
+
+      <!-- <ion-button fill="clear" slot="end">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-item> -->
+
+    <!-- Value row -->
+    <ion-item lines="none">
+  <ion-label>Tax Class</ion-label>
+
+  <ion-select
+    slot="end"
+    [(ngModel)]="selectedTaxClassSlug"
+    [selectedText]="getSelectedTaxLabel()"
+    interface="popover"
+  >
+    <ion-select-option
+      *ngFor="let tax of taxClasses"
+      [value]="tax.slug"
+    >
+      {{ tax.name }} ({{ tax.percentage }}%)
+    </ion-select-option>
+  </ion-select>
+</ion-item>
+
+  </ion-card>
+
+
+
+   <!-- Categories -->
+  <ion-card class="settings-card">
+  <ion-item lines="none">
+  <ion-label>Category</ion-label>
+
+  <ion-select
+    slot="end"
+    [(ngModel)]="product.category_id"
+    interface="popover"
+  >
+    <ion-select-option
+      *ngFor="let cat of categories"
+      [value]="cat.id"
+    >
+      {{ cat.name }}
+    </ion-select-option>
+  </ion-select>
+</ion-item>
+</ion-card>
+
+
+  <!-- Product Tags -->
+  <ion-card class="settings-card">
+    <ion-item lines="none">
+      <ion-label>
+        Product tags
+      </ion-label>
+
+      <ion-select
+        slot="end"
+        multiple="true"
+        [(ngModel)]="product.tag_ids"
+        interface="popover"
+      >
+        <ion-select-option *ngFor="let tag of tags" [value]="tag.id">
+          {{ tag.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+
+
+  
+
+  <!-- Product Type -->
+  <ion-card class="settings-card">
+    <ion-item lines="none">
+      <ion-label>
+        Type
+      </ion-label>
+
+      <ion-select
+        slot="end"
+        [(ngModel)]="product.type"
+        (ionChange)="onProductTypeChange()"
+        interface="popover"
+      >
+        <ion-select-option value="simple">Simple Product</ion-select-option>
+        <ion-select-option value="variable">Variable Product</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+
+
+  <!-- ATTRIBUTES (VARIABLE PRODUCT ONLY) -->
+  <!-- ATTRIBUTES (VARIABLE PRODUCT ONLY) -->
+<ion-card *ngIf="product.type === 'variable'" class="settings-card">
+
+  <ion-item>
+    <ion-label><strong>Attributes</strong></ion-label>
+  </ion-item>
+
+  <ion-card-content *ngIf="attributes.length === 0">
+    <ion-text color="medium">
+      Loading attributes...
+    </ion-text>
+  </ion-card-content>
+
+  <!-- Attribute Loop -->
+  <div *ngFor="let attr of attributes" class="attribute-row">
+
+    <!-- Header -->
+    <ion-item lines="full"
+              (click)="toggleAttribute(attr.id)"
+              style="cursor:pointer;">
+
+      <ion-label>
+        <strong>{{ attr.name }}</strong>
+      </ion-label>
+
+      <ion-icon
+        slot="end"
+        [name]="expandedAttributes[attr.id]
+          ? 'chevron-up-outline'
+          : 'chevron-down-outline'">
+      </ion-icon>
+
+    </ion-item>
+
+    <!-- Terms -->
+    <div *ngIf="expandedAttributes[attr.id]">
+
+      <div *ngFor="let term of attr.terms">
+
+        <ion-item lines="none">
+
+          <ion-checkbox
+            slot="start"
+            [checked]="selectedAttributes[attr.id]?.includes(term.name)"
+            (ionChange)="onAttributeToggle(attr.id, term.name, $event)"
+            >
+          </ion-checkbox>
+
+          <ion-label>
+            {{ term.name }}
+          </ion-label>
+
+        </ion-item>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-card>
+  <!-- Variation Pricing -->
+  <!-- <ion-card
+    *ngIf="product.type === 'variable' &&
+        generatedCombinations.length > 0"
+    class="variation-card settings-card">
+
+    <ion-item class="variation-header">
+      <ion-label><strong>Variations</strong></ion-label>
+    </ion-item>
+
+    <div *ngFor="let combo of generatedCombinations" lines="none"
+      class="variation-item">
+
+      <ion-label class="variation-label">
+        <h3>{{ getComboLabel(combo) }}</h3>
+      </ion-label>
+
+      <ion-input
+        type="number"
+        placeholder="Enter variation price"
+        class="variation-price"
+        [ngModel]="getVariationPrice(combo)"
+        (ngModelChange)="setVariationPrice(combo, $event)">
+      </ion-input>
+
+    </div>
+
+  </ion-card> -->
+  <ion-card
+  *ngIf="product.type === 'variable' && generatedCombinations.length > 0"
+  class="variation-card settings-card">
+
+  <ion-item class="variation-header" lines="none">
+    <ion-label><strong>Variations</strong></ion-label>
+  </ion-item>
+
+  <div
+    *ngFor="let combo of generatedCombinations"
+    class="variation-item">
+
+    <div class="variation-row">
+      <div class="variation-label">
+        {{ getComboLabel(combo) }}
+      </div>
+
+      <ion-input
+        type="number"
+        placeholder="Price"
+        class="variation-price"
+        [ngModel]="getVariationPrice(combo)"
+        (ngModelChange)="setVariationPrice(combo, $event)">
+      </ion-input>
+    </div>
+
+  </div>
+</ion-card>
+  <!-- Pricing -->
+  <ion-card class="settings-card">
+
+    <!-- REGULAR PRICE -->
+    <ion-item lines="none" class="editable-item" (click)="enableRegularPriceEdit()">
+  
+  <ion-label position="stacked">
+    Regular price
+  </ion-label>
+
+  <!-- Display -->
+  <div class="value-text" *ngIf="!editRegularPrice">
+    {{ product.regular_price ? formatPrice(product.regular_price) : 'Add regular price' }}
+  </div>
+
+  <!-- Input -->
+  <ion-input
+  *ngIf="editRegularPrice"
+  #regularPriceInput
+  type="text"
+  [value]="formatPrice(product.regular_price)"
+  (ionInput)="onPriceInput($event, 'regular_price')"
+  (ionBlur)="editRegularPrice = false"
+></ion-input>
+
+</ion-item>
+
+    <!-- SALE PRICE -->
+    <ion-item lines="none" class="editable-item" (click)="enableSalePriceEdit()">
+  
+  <ion-label position="stacked">
+    Sale price
+  </ion-label>
+
+  <!-- Display -->
+  <div class="value-text" *ngIf="!editSalePrice">
+    {{ product.sale_price ? formatPrice(product.sale_price) : 'Add sale price' }}
+  </div>
+
+  <!-- Input -->
+  <ion-input
+  *ngIf="editSalePrice"
+  #salePriceInput
+  type="text"
+  [value]="formatPrice(product.sale_price)"
+  (ionInput)="onPriceInput($event, 'sale_price')"
+  (ionBlur)="editSalePrice = false"
+></ion-input>
+
+</ion-item>
+<div class="error-text" *ngIf="salePriceError">
+  {{ salePriceError }}
+</div>
+
+  </ion-card>
+
+
+
+  <!-- Inventory -->
+  <ion-card class="settings-card">
+
+    <!-- Manage Stock -->
+    <!-- <ion-item lines="full">
+      <ion-label>
+        Manage Stock
+      </ion-label>
+
+      <ion-toggle
+        slot="end"
+        [(ngModel)]="product.manage_stock"
+      ></ion-toggle>
+    </ion-item> -->
+
+    <!-- Stock Status -->
+<!-- <ion-item lines="none" class="dropdown-item">
+  <ion-label>
+    Stock status
+  </ion-label>
+
+  <ion-note
+    class="stock-badge"
+    [ngClass]="product.stock_status"
+  >
+    {{
+      product.stock_quantity > 0
+        ? 'In stock' : 'Out of stock'
+    }}
+    
+  </ion-note>
+
+  <ion-select
+    interface="popover"
+    class="full-row-select"
+    [(ngModel)]="product.stock_status"
+  >
+    <ion-select-option value="instock">
+      In stock
+    </ion-select-option>
+
+    <ion-select-option value="outofstock">
+      Out of stock
+    </ion-select-option>
+  </ion-select>
+</ion-item> -->
+
+<ion-item lines="none" class="dropdown-item">
+  <ion-label>
+    Stock status
+  </ion-label>
+
+  <!-- Badge -->
+  <ion-note
+    class="stock-badge"
+    [ngClass]="product.stock_status"
+  >
+    {{ stockLabel }}
+  </ion-note>
+  
+  <!-- Select -->
+  <!-- <ion-select
+    interface="popover"
+    class="full-row-select"
+    [(ngModel)]="product.stock_status"
+  >
+    <ion-select-option value="instock">
+      In stock
+    </ion-select-option>
+
+    <ion-select-option value="outofstock">
+      Out of stock
+    </ion-select-option>
+  </ion-select> -->
+</ion-item>
+
+  </ion-card>
+  
+<!-- <ion-card class="settings-card">
+  <ion-item lines="none">
+    <ion-label position="stacked">Stock Quantity</ion-label>
+    <ion-input
+      type="number"
+      [(ngModel)]="product.stock_quantity"
+      placeholder="Enter stock quantity">
+    </ion-input>
+  </ion-item>
+</ion-card> -->
+
+  <!-- SAVE / PUBLISH BUTTON -->
+  <ion-button
+    expand="block"
+    class="save-btn"
+    (click)="publishProduct()"
+    [disabled]="isSubmitting"
+  >
+    {{ isSubmitting ? 'Please wait...' : (isEdit ? 'Save Changes' : 'Publish') }}
+  </ion-button>
+
+  <!-- DELETE BUTTON (EDIT ONLY) -->
+  <ion-button
+    *ngIf="isEdit"
+    expand="block"
+    fill="outline"  
+    color="danger"
+    class="delete-btn"
+    (click)="confirmDelete()"
+  >
+    Delete Product
+  </ion-button>
+
+</ion-content>

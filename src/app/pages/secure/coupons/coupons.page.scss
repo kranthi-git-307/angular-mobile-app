@@ -1,0 +1,423 @@
+.coupons-header{
+  background: #264c73;
+  padding-bottom: 12px;
+
+  ion-toolbar {
+    --background: #264c73;
+    --color: #fff;
+    --padding-start: 0px;   /* reduces left space of toolbar */
+  }
+
+  ion-title {
+    padding-left: 0;
+    margin-left: -6px;
+    font-size: 21px;
+    font-weight: 700;
+  }
+}
+
+.coupons-header ion-button ion-icon {
+  font-size: 30px;   /* increase size */
+}
+
+/* header row */
+.header-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 16px;
+}
+
+
+
+/* search area */
+.search-wrapper{
+  margin: 10px 10px;
+  background: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 8px 18px;
+  gap: 10px;
+
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.search-wrapper input{
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #3b3b3b;
+  font-size: 18px;          /* bigger text */
+  font-weight: 400;         /* normal (not bold) */
+  outline: none;
+  letter-spacing: 0px;
+}
+
+.search-wrapper ion-icon{
+  color: #3b3b3b;
+  font-size: 25px;          /* slightly bigger */
+  opacity: 0.75; 
+}
+
+/* Placeholder */
+.search-wrapper input::placeholder {
+  color: #3b3b3b;
+  opacity: 0.55;            /* lighter than text */
+  font-weight: 400;
+  font-size: 17px; 
+}
+// .search-container ion-searchbar{
+//   --background:#ffffff;
+//   --border-radius:10px;
+// }
+// .search-container{
+//   background:#2f5277;
+//   padding:12px 16px 30px;
+// }
+// ion-header{
+//   background:#2f5277;
+//   border-bottom-left-radius:28px;
+//   border-bottom-right-radius:28px;
+//   overflow:hidden;
+// }
+
+/* CONTENT */
+
+
+.coupon-card {
+  background: #ffffff !important;   /* 👈 light grey like image */
+
+  margin: 10px 0;
+  padding-left: 15px;
+  padding-top: 15px;
+  border-radius: 12px;
+
+  border-bottom: 4px solid transparent;   /* 👈 important */
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.coupon-card:nth-child(5n+1) {
+  border-bottom: 4px solid #d1c876;   /* teal */
+}
+
+.coupon-card:nth-child(5n+2) {
+  border-bottom: 4px solid #de667c;   /* blue-purple */
+}
+
+.coupon-card:nth-child(5n+3) {
+  border-bottom: 4px solid #6ac2c3;   /* yellow */
+}
+
+.coupon-card:nth-child(5n+4) {
+  border-bottom: 4px solid #db8366;   /* green */
+}
+
+.coupon-card:nth-child(5n+5) {
+  border-bottom: 4px solid #66a8de;   /* red */
+}
+
+.coupon-card:nth-child(5n+1) .icon-box { background: #d1c876; }
+.coupon-card:nth-child(5n+2) .icon-box { background: #de667c; }
+.coupon-card:nth-child(5n+3) .icon-box { background: #6ac2c3; }
+.coupon-card:nth-child(5n+4) .icon-box { background: #db8366; }
+.coupon-card:nth-child(5n+5) .icon-box { background: #66a8de; }
+
+
+ion-item-sliding{
+  margin:12px;
+  border:1px solid #e6e6e6;
+  border-radius:14px;
+  overflow:hidden;
+}
+ion-content{
+  --padding-start:12px;
+  --padding-end:12px;
+  --background: #f6f6f6;
+  --padding-top: 8px;
+}
+ion-item-sliding{
+  margin:12px 0;
+}
+ion-item-options{
+  height:100%;
+}
+
+ion-item-option{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+}
+
+/* ROW */
+.card-row {
+  display: flex;
+  align-items: flex-start;   /* 🔥 change from center → flex-start */
+  gap: 12px;
+}
+.top-row {
+  display: flex;
+  align-items: center;
+}
+/* ICON */
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 55px;
+  height: 55px;
+
+  background: #587291;   /* 👈 background color */
+  border-radius: 8px;   /* 👈 rounded box */
+
+  margin-top: 6px;
+}
+
+.coupon-icon {
+  width: 25px;   /* 🔥 increase */
+  height: 25px;
+  //object-fit: contain
+}
+
+.card-content {
+  flex: 1;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;   /* 🔥 align left cleanly */
+  gap: 4px;
+}
+
+/* CODE */
+
+.code{
+  font-size: 21px;
+  font-weight: 600;;
+  color:#2e3135;
+  margin: 2px 0;        /* 🔥 reduce vertical gap */
+  line-height: 1.0;
+}
+
+/* DESCRIPTION */
+
+.description {
+  font-size: 16px;
+  color: #6f6f6f;
+  margin-top: 4px;
+  margin: 2px 0;        /* 🔥 reduce vertical gap */
+  line-height: 1.0;
+}
+/* AMOUNT */
+
+.amount{
+  font-size:16px;
+  color:#cc7a00;
+  margin-top:8px;
+  margin: 2px 0;        /* 🔥 reduce vertical gap */
+  line-height: 1.0;
+}
+.divider-row {
+  display: flex;
+  align-items: center;
+
+  width: calc(100% + 76px);   /* 🔥 increase based on icon width */
+  margin-left: -76px;         /* 🔥 pull across icon */
+
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+.divider-line {
+  flex: 1;
+  height: 2px;
+  background: #e1e1e1;
+}
+
+.coupon-id {
+  font-size: 12px;
+  color: #9b9b9b;
+  margin-left: 8px;
+}
+
+.expiry-text {
+  font-size: 12px;
+  color: #9b9b9b;
+  margin-right: 8px;
+}
+.content-row {
+  width: 100%;
+}
+.bottom-row {
+  display: flex;
+  justify-content: flex-end;   /* 👉 push to right */
+  align-items: center;
+  gap: 10px;                  /* space between */
+  margin-top: 2px;
+}
+.bottom-row {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;   /* 🔥 IMPORTANT */
+  margin-top: 10px;
+}
+
+/* GROUP BACKGROUND */
+.action-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: #ffffff;   /* 👈 main background */
+  padding: 6px 8px;
+  border-radius: 10px;
+}
+
+/* usage (inside group) */
+.usage {
+  background: #ebebeb;
+    padding: 6px 6px;
+    border-radius: 6px;
+    color: #585858;
+    font-size: 14px;
+    font-weight:600;
+    margin: 0px 6px;
+}
+
+/* publish button */
+.status {
+  background: #e8ffef;
+  color: #1ba629;
+  padding: 6px 6px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight:600;
+}
+
+.coupons-header ion-buttons[slot="start"] {
+  margin-left: -8px;   /* 👈 move back arrow left */
+}
+
+.coupons-header ion-back-button {
+  margin-left: -4px;   /* 👈 extra fine tuning */
+}
+
+///////page loading state///////
+
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  color: #666;
+}
+
+.loader-wrapper ion-spinner {
+  width: 40px;
+  height: 40px;
+}
+
+.loader-wrapper p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/////////////////////////////////////////////
+
+/* iOS ONLY - Orders Header Fix */
+:host-context(.ios) .coupons-header ion-toolbar {
+  display: flex;
+  align-items: center;
+}
+
+/* Fix back button spacing */
+:host-context(.ios) .coupons-header ion-buttons[slot="start"] {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Remove iOS default title centering */
+:host-context(.ios) .coupons-header ion-title {
+  position: static !important;
+  transform: none !important;
+  text-align: left;
+  padding-left: 0;
+  margin-left: 2px;   /* 👈 same 2px spacing */
+  flex: 1;
+}
+
+/* Reduce back button padding */
+:host-context(.ios) .coupons-header ion-back-button {
+  --padding-start: 0px;
+  margin-left: 2px;
+}
+
+/* Hide "Back" text */
+:host-context(.ios) ion-back-button::part(text) {
+  display: none;
+}
+
+/* iOS ONLY - Back Button Circle */
+:host-context(.ios) .coupons-header ion-back-button::part(native) {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  padding: 0 !important;
+}
+
+/* Fix back icon alignment */
+:host-context(.ios) .coupons-header ion-back-button::part(icon) {
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  font-size: 20px;
+}
+
+/* Spacing for back button */
+:host-context(.ios) .coupons-header ion-back-button {
+  --icon-margin-start: 0;
+  --icon-margin-end: 0;
+
+  margin-left: 0px;   /* reset default */
+  margin-right: 6px;
+}
+
+/* iOS ONLY - Add Button Circle */
+:host-context(.ios) .coupons-header ion-buttons[slot="end"] ion-button {
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+}
+
+/* Center + icon */
+:host-context(.ios) .coupons-header ion-buttons[slot="end"] ion-icon {
+  font-size: 22px;
+  margin: 0;
+}
+
+:host-context(.ios) .coupons-header .search-wrapper {
+  border-radius: 48px;
+  padding: 4px 14px;   /* 👈 top/bottom reduced */
+  margin-left: 12px;
+  margin-right: 12px;
+}

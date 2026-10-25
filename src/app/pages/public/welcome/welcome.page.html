@@ -1,0 +1,58 @@
+<ion-content
+  [ngClass]="isDarkBg ? 'dark-bg' : 'light-bg'"
+  fullscreen>
+  <swiper
+    #swiper
+    [config]="config"
+    (slideChange)="onSlideChange()"
+    class="welcome-swiper">
+
+    <!-- Slide 1 -->
+    <ng-template swiperSlide>
+      <div class="slide">
+        <img src="assets/onboarding/slide-1.png" class="slide-image" />
+        <h2>Real-Time Store Control</h2>
+        <p>Manage your store anytime, anywhere.</p>
+      </div>
+    </ng-template>
+
+    <!-- Slide 2 -->
+    <ng-template swiperSlide>
+      <div class="slide">
+        <img src="assets/onboarding/slide-2.png" class="slide-image slide-2-image" />
+        <h2>Smart Inventory</h2>
+        <p>Track stock levels and sales instantly.</p>
+      </div>
+    </ng-template>
+
+    <!-- Slide 3 -->
+    <ng-template swiperSlide>
+      <div class="slide">
+        <img src="assets/onboarding/slide-3.png" class="slide-image slide-3-image" />
+        <h2>Start your Admin Journey</h2>
+        <p>Start managing your retail operations efficiently.</p>
+      </div>
+    </ng-template>
+
+  </swiper>
+
+  <!-- ✅ BUTTON OUTSIDE SWIPER -->
+  <ion-button
+    *ngIf="currentIndex === 2"
+    expand="block"
+    class="get-started-btn"
+    type="button"
+    (click)="goToSignIn()">
+    Get Started
+  </ion-button>
+
+</ion-content>
+
+<ion-footer class="welcome-footer" *ngIf="currentIndex !== 2">
+  <div class="footer-container">
+    <span class="skip-btn" (click)="goToLastSlide()">Skip..</span>
+    <div class="next-btn" (click)="nextSlide()">
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </div>
+  </div>
+</ion-footer>

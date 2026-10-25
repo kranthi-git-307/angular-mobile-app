@@ -1,0 +1,165 @@
+<ion-header class="vendor-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Order Payments</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="paymentFilter.open()">
+        <ion-icon name="funnel-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-select
+    #paymentFilter
+    interface="popover"
+    (ionChange)="onPaymentFilter($event)"
+    style="display: none"
+  >
+    <ion-select-option value="">All</ion-select-option>
+    <ion-select-option value="cash">Cash</ion-select-option>
+    <ion-select-option value="ebt">EBT</ion-select-option>
+    <ion-select-option value="card">Card</ion-select-option>
+    <ion-select-option value="wallet">Wallet</ion-select-option>
+    <ion-select-option value="void">Void</ion-select-option>
+  </ion-select>
+  <!-- Search -->
+  <div class="search-wrapper">
+    <ion-icon name="search-outline" class="search-icon"></ion-icon>
+    <input
+      placeholder="Search by order Id"
+      (input)="onSearch($event)"
+    />
+
+  </div>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+   <!-- LOADING STATE -->
+  <div *ngIf="loading && payments.length === 0" class="loader-wrapper">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <!-- PAGE LOADER -->
+  <div *ngIf="loading && payments.length === 0" class="page-loader">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Loading payments...</p>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div *ngIf="!loading && payments?.length === 0" class="empty">
+    No payments found
+  </div>
+
+  <!-- PAYMENT CARDS -->
+  <ion-card
+    *ngFor="let p of groupedPayments; trackBy: trackByOrder; let i = index"
+    class="payment-card"
+    [ngClass]="'card-' + (i % 5)">
+
+    <!-- TOP COLOR STRIP -->
+    <div class="card-accent"></div>
+
+    <!-- Top Row -->
+    <div class="top-row">
+      <div class="date">
+        {{ p?.created_at ? (p.created_at | date:'MMM d, yyyy | hh:mm a') : '-' }}
+      </div>
+
+      <div class="accepted-by" *ngIf="p?.accepted_by">
+        <span class="dot"></span>
+        {{ p.accepted_by }}
+      </div>
+    </div>
+
+    <!-- Order + Transaction -->
+    <!-- <div class="info-row">
+      <div>Order ID: <b>{{ p?.meta?.order_id || '-' }}</b></div>
+      <div>Transaction ID: <b>{{ p?.transaction_id || '-' }}</b></div>
+    </div>
+
+    <div class="info-row">
+      <div>
+        Order Total:
+        <b>{{ p?.order_total ? (p.order_total | currency:'INR') : '₹0.00' }}</b>
+      </div>
+
+      <div>
+        Tender Amount:
+        <b>{{ p?.tender_amount ? (p.tender_amount | currency:'INR') : '₹0.00' }}</b>
+      </div>
+    </div> -->
+    <!-- <div class="info-row">
+      <div>Order ID: <b>{{ p?.order_id || '-' }}</b></div>
+      <div>
+        Order Total:
+        <b>{{ p?.order_total ? (p.order_total | currency:'INR') : '₹0.00' }}</b>
+      </div>
+    </div>
+
+    <div *ngFor="let t of p.transactions" class="info-row">
+      <div>
+        Transaction ID: <b>{{ t.transaction_id }}</b>
+      </div>
+      <div>
+        Payment Mode: <b>{{ t.pay_mode }}</b>
+      </div>
+      <div>
+        Tender Amount:
+        <b>{{ t.tender_amount | currency:'INR' }}</b>
+      </div>
+    </div> -->
+    <div class="info-row">
+      <div>Order ID: <b>{{ p?.order_id || '-' }}</b></div>
+      <div>
+        Order Total:
+        <b>{{ p?.order_total ? (p.order_total) : '0.00' }}</b>
+      </div>
+    </div>
+   <div class="divider"></div>
+    <!-- Transactions -->
+    <div class="transactions">
+
+      <div *ngFor="let t of p.transactions" class="transaction-row">
+
+        
+          <div class="mode">
+            Transaction ID: <b>{{ t.transaction_id }}</b>
+          </div>
+          
+        
+
+        
+            <div class="mode">
+              Tender Amount:
+              <b>{{ t.tender_amount }}</b>
+            </div>
+        
+
+        <div class="mode">
+            Payment Mode: <b>{{ t.pay_mode }}</b>
+        </div>
+
+      </div>
+
+    </div>
+    
+
+  </ion-card>
+
+  <!-- Infinite Scroll -->
+  <ion-infinite-scroll
+    threshold="100px"
+    (ionInfinite)="loadPayments($event)"
+    [disabled]="!hasMore">
+
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more payments...">
+    </ion-infinite-scroll-content>
+
+  </ion-infinite-scroll>
+
+</ion-content>

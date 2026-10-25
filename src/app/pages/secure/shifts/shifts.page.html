@@ -1,0 +1,111 @@
+<ion-header class="shift-header">
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text=""></ion-back-button>
+    </ion-buttons>
+    
+
+    <ion-title>Shifts</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear">
+        
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+  <div class="search-container">
+    <ion-icon name="search-outline" class="search-icon"></ion-icon>
+    <input
+      type="text"
+      placeholder="Search by name"
+      (input)="onSearch($event)"
+    />
+  </div>
+</ion-header>
+
+
+
+<!-- CONTENT (ALL CARDS HERE) -->
+<ion-content class="ion-padding">
+
+  <!-- LOADING STATE -->
+  <div *ngIf="loading && filteredShifts.length === 0" class="loader-wrapper">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <ion-card
+    *ngFor="let shift of filteredShifts; let i = index"
+    class="shift-card"
+    [ngClass]="getBorderColor(i)">
+
+    <ion-card-content>
+
+      <div class="top-row">
+        <div class="user">
+
+          <div class="avatar" [ngClass]="getBorderColor(i)">
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+
+          <div>
+            <h3>{{ shift.staffName }}</h3>
+
+            <p class="muted">
+              Opening Bal:
+              <span class="amount">${{ shift.openingBalance | number:'1.2-2' }}</span>
+            </p>
+
+            <p class="muted">
+              Sale:
+              <span class="amount">${{ shift.sales | number:'1.2-2' }}</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="right">
+          <p class="date">• {{ shift.date | date:'MMM d, yyyy' }}</p>
+
+          <p class="muted">
+            Closing Bal:
+            <span class="amount">${{ shift.closingBalance | number:'1.2-2' }}</span>
+          </p>
+
+          <p class="muted">
+            Over/Short:
+            <span class="amount">
+    {{ shift.overShort | number:'1.2-2' }}
+  </span>
+          </p>
+        </div>
+      </div>
+
+      
+
+      <div class="bottom-row">
+  <span>
+    <span class="label">Start:</span>
+    <span class="value">{{ shift.startTime }}</span>
+  </span>
+
+  <span>
+    <span class="label">End:</span>
+    <span class="value">{{ shift.endTime }}</span>
+  </span>
+
+  <span>
+    <span class="label">Duration:</span>
+    <span class="value">{{ shift.duration }}</span>
+  </span>
+</div>
+
+    </ion-card-content>
+  </ion-card>
+<ion-infinite-scroll threshold="100px" (ionInfinite)="loadShifts($event)">
+  <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+    loadingText="Loading more shifts...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
+</ion-content>

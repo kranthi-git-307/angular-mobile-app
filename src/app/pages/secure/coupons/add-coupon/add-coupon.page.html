@@ -1,0 +1,257 @@
+<ion-header class="coupon-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/coupons" text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Add Coupon</ion-title>
+
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="coupon-content">
+
+<!-- CODE + DESCRIPTION -->
+<ion-card class="coupon-card">
+
+<!-- CODE -->
+<ion-item lines="none">
+  <ion-label position="stacked">Code</ion-label>
+
+  <div *ngIf="editing !== 'code'" class="value-row">
+  <span
+    (click)="startEdit('code')"
+    class="editable-text"
+    [ngClass]="{ 'placeholder-text': !coupon.code }">
+
+    {{ coupon.code || 'Enter code' }}
+  </span>
+</div>
+
+  <ion-input
+    *ngIf="editing === 'code'"
+    [(ngModel)]="coupon.code"
+    placeholder="Enter code"
+    (ionInput)="markDirty()">
+  </ion-input>
+</ion-item>
+
+<!-- DESCRIPTION -->
+<ion-item lines="none">
+  <ion-label position="stacked">Description</ion-label>
+
+  <div *ngIf="editing !== 'description'" class="value-row">
+    <span (click)="startEdit('description')" class="editable-text">
+      {{ coupon.description || '----' }}
+    </span>
+  </div>
+
+  <ion-input
+    *ngIf="editing === 'description'"
+    [(ngModel)]="coupon.description"
+    placeholder="Enter description"
+    (ionInput)="markDirty()">
+  </ion-input>
+</ion-item>
+
+</ion-card>
+
+
+<!-- STATUS / AMOUNT / TYPE -->
+<ion-card class="coupon-card">
+
+<ion-item>
+  <ion-label>Status</ion-label>
+  <ion-badge color="success">Publish</ion-badge>
+</ion-item>
+
+<!-- AMOUNT -->
+<ion-item lines="none">
+  <ion-label position="stacked">Amount</ion-label>
+
+  <div *ngIf="editing !== 'amount'" class="value-row">
+    <span (click)="startEdit('amount')" class="editable-text">
+      {{ coupon.amount || '0' }}
+    </span>
+  </div>
+
+  <ion-input
+    type="number"
+    *ngIf="editing === 'amount'"
+    [(ngModel)]="coupon.amount"
+    (ionInput)="markDirty()">
+  </ion-input>
+</ion-item>
+
+<!-- TYPE -->
+<ion-item lines="none">
+  <ion-label>Type</ion-label>
+
+  <ion-select
+    [(ngModel)]="coupon.type"
+    interface="popover"
+    (ionChange)="markDirty()">
+
+    <ion-select-option value="fixed_cart">
+      Cart Discount
+    </ion-select-option>
+
+    <ion-select-option value="fixed_product">
+      Product Discount
+    </ion-select-option>
+
+  </ion-select>
+</ion-item>
+
+</ion-card>
+
+
+<!-- USAGE SETTINGS -->
+<ion-card class="coupon-card">
+
+<ion-item>
+  <ion-label>Individual use</ion-label>
+  <ion-toggle
+    [(ngModel)]="coupon.individualUse"
+    (ionChange)="markDirty()">
+  </ion-toggle>
+</ion-item>
+
+<!-- Usage Limit -->
+<ion-item lines="none">
+  <ion-label position="stacked">Usage limit</ion-label>
+
+  <div *ngIf="editing !== 'usageLimit'" class="value-row">
+    <span (click)="startEdit('usageLimit')" class="editable-text">
+      {{ coupon.usageLimit || '----' }}
+    </span>
+  </div>
+
+  <ion-input
+    type="number"
+    *ngIf="editing === 'usageLimit'"
+    [(ngModel)]="coupon.usageLimit"
+    (ionInput)="markDirty()">
+  </ion-input>
+</ion-item>
+
+<!-- Usage Limit Per User -->
+<ion-item lines="none">
+  <ion-label position="stacked">Usage limit per user</ion-label>
+
+  <div *ngIf="editing !== 'usageLimitPerUser'" class="value-row">
+    <span (click)="startEdit('usageLimitPerUser')" class="editable-text">
+      {{ coupon.usageLimitPerUser || '----' }}
+    </span>
+  </div>
+
+  <ion-input
+    type="number"
+    *ngIf="editing === 'usageLimitPerUser'"
+    [(ngModel)]="coupon.usageLimitPerUser"
+    (ionInput)="markDirty()">
+  </ion-input>
+</ion-item>
+
+<ion-item lines="none">
+  <ion-label>Exclude sale items</ion-label>
+
+  <ion-toggle
+    [(ngModel)]="coupon.excludeSale"
+    (ionChange)="markDirty()">
+  </ion-toggle>
+</ion-item>
+
+</ion-card>
+
+
+<!-- MIN / MAX -->
+<ion-card class="coupon-card">
+
+<!-- Minimum -->
+<ion-item lines="none">
+  <ion-label position="stacked">Minimum amount</ion-label>
+
+  <div *ngIf="editing !== 'minAmount'" class="value-row">
+    <span (click)="startEdit('minAmount')" class="editable-text">
+      {{ coupon.minAmount || '0.00' }}
+    </span>
+  </div>
+
+  <ion-input
+    type="number"
+    *ngIf="editing === 'minAmount'"
+    [(ngModel)]="coupon.minAmount"
+    (ionInput)="markDirty()">
+  </ion-input>
+</ion-item>
+
+<!-- Maximum -->
+<ion-item lines="none">
+  <ion-label position="stacked">Maximum amount</ion-label>
+
+  <div *ngIf="editing !== 'maxAmount'" class="value-row">
+    <span (click)="startEdit('maxAmount')" class="editable-text">
+      {{ coupon.maxAmount || '0.00' }}
+    </span>
+  </div>
+
+  <ion-input
+    type="number"
+    *ngIf="editing === 'maxAmount'"
+    [(ngModel)]="coupon.maxAmount"
+    (ionInput)="markDirty()">
+  </ion-input>
+</ion-item>
+
+</ion-card>
+
+
+<!-- EXPIRE DATE -->
+<ion-card class="coupon-card">
+  <ion-item lines="none" (click)="openDatePicker()">
+  <ion-label>
+    Expire date: {{ coupon.expireDate || 'Select date' }}
+  </ion-label>
+
+  <ion-icon name="calendar-outline" slot="end"></ion-icon>
+</ion-item>
+</ion-card>
+
+
+<!-- DATE MODAL -->
+<ion-modal
+  [isOpen]="showDatePicker"
+  (didDismiss)="showDatePicker=false"
+  class="calendar-modal">
+
+  <ng-template>
+    <div class="calendar-container">
+
+      <ion-datetime
+        presentation="date"
+        [value]="coupon.expireDate"
+        (ionChange)="setDate($event)">
+      </ion-datetime>
+
+    </div>
+  </ng-template>
+
+</ion-modal>
+
+<!-- CREATE BUTTON (BOTTOM) -->
+<div class="update-wrapper">
+  <ion-button
+    expand="block"
+    fill="solid"
+    class="update-bottom-btn"
+    (click)="saveCoupon()">
+
+    Create Coupon
+
+  </ion-button>
+</div>
+
+</ion-content>
+

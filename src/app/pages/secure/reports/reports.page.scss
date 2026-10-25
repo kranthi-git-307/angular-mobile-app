@@ -1,0 +1,362 @@
+.reports-content {
+  --background: #f4f5f8;
+}
+
+.date-input {
+  margin: 12px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.report-tabs {
+  margin: 10px;
+}
+
+.summary-card {
+  text-align: center;
+  background: linear-gradient(135deg, #264c73, #264c73);
+  color: #fff;
+}
+
+.summary-card1 {
+  text-align: center;
+  background: linear-gradient(135deg, #264c73, #264c73);
+  color: #fff;
+}
+
+.hour-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.staff-card {
+  margin: 10px;
+  border-left: 4px solid #3880ff;
+}
+ion-card {
+  margin-bottom: 16px;
+}
+
+.chart-container {
+  height: 260px;
+  position: relative;
+}
+
+
+.products-header {
+  ion-toolbar {
+    --background: #264c73;
+    --color: #fff;
+    --padding-start: 4px;
+
+    min-height: 64px;   /* increase header height */
+  }
+
+  ion-title {
+    padding-left: 0;
+    margin-left: -6px;
+    font-weight: 700;
+  font-size: 20px;   
+  }
+}
+
+.search-wrapper {
+  margin: 10px 16px;
+  background: #9aa7b8;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+
+  input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: #fff;
+    outline: none;
+  }
+
+  ion-icon {
+    color: #fff;
+  }
+}
+.chart-container {
+  position: relative;
+  height: 250px;
+  width: 100%;
+}
+
+ion-footer {
+  ion-toolbar {
+    --background: #ffffff;
+  }
+
+  ion-segment {
+    padding: 8px;
+  }
+}
+.reports-content {
+  --background: #f4f6fb;
+}
+.reports-content {
+  --background: #f4f6fb;
+}
+
+.summary-card {
+  border-radius: 10px;
+  background: #264c73;  /* deep navy */
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  height : 90px;
+  margin-bottom: 4px;
+}
+
+.summary-card1 {
+  border-radius: 10px;
+  background: #264c73;  /* deep navy */
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  height : 80px;
+  margin-bottom: 4px;
+}
+.date-input {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 6px 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.date-input ion-icon {
+  color: #3763a7;   /* match your summary card color */
+  font-size: 18px;
+}
+
+.date-input ion-input {
+  font-weight: 500;
+  color: #333;
+  border-radius: 14px;
+}
+.chart-header {
+  padding-bottom: 0;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.month-indicator {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  background: rgb(123, 2, 81);
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.no-data{
+  height:200px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#777;
+  font-size:14px;
+  text-align:center;
+}
+// .date-input {
+//   background: #ffffff;
+// }
+// .date-input {
+//   --background: #3f5065;
+//   background: #3f5065;
+//   border-radius: 12px;
+//   margin: 12px 16px;
+//   color: #ffffff;
+// }
+// .date-input ion-icon {
+//   color: #ffffff;
+// }
+// .date-input ion-input {
+//   color: #ffffff;
+// }
+
+.sales-filter{
+  padding: 0 16px;   /* match ion-card margin */
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.pill-segment{
+  display: flex;
+  gap: 12px;   /* space between buttons */
+  background: transparent;
+  padding: 0 10px; /* optional side spacing */
+}
+
+.pill-segment ion-segment-button {
+  --background: #dcdcdc;
+  --background-checked: #264c73;
+  --color: #444;
+  --color-checked: #ffffff;
+
+  border-radius: 10px;
+
+  height: 36px;           /* FIX: use fixed height */
+  line-height: 36px;      /* FIX: force vertical centering */
+
+  font-size: 14px;
+  text-transform: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0 16px;        /* reduce side padding */
+}
+
+.pill-segment ion-segment-button::part(native) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* center the text perfectly */
+.pill-segment ion-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.report-dropdown::part(icon) {
+  display: none;   /* hide default filled arrow */
+}
+
+.dropdown-arrow {
+  font-size: 18px;
+  color: #ffffff;
+  margin-left: -8px;
+}
+
+.products-header ion-buttons[slot="end"] {
+  padding-right: 20px;   /* adjust 10–16px if needed */
+}
+.report-dropdown {
+  padding-right: 8px;   /* space for arrow */
+  // --padding-end: 20px;
+  font-size: 18px
+  
+}
+
+/* Normal text */
+.pill-segment ion-segment-button ion-label {
+  font-weight: 400;
+}
+
+/* Selected text */
+.pill-segment ion-segment-button.segment-button-checked ion-label {
+  font-weight: 700 !important;
+}
+
+/* remove hover highlight completely */
+.pill-segment ion-segment-button {
+  --background-hover: transparent;
+  --background-focused: transparent;
+  --background-activated: transparent;
+  --ripple-color: transparent;
+  --indicator-color: transparent;
+  box-shadow: none;
+}
+
+/* remove focus outline */
+.pill-segment ion-segment-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* remove hover effect */
+.pill-segment ion-segment-button:hover {
+  --background-hover: transparent;
+}
+
+/////////////////////////////////////////////
+
+/* iOS ONLY - Orders Header Fix */
+:host-context(.ios) .products-header ion-toolbar {
+  display: flex;
+  align-items: center;
+}
+
+/* Fix back button spacing */
+:host-context(.ios) .products-header ion-buttons[slot="start"] {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Remove iOS default title centering */
+:host-context(.ios) .products-header ion-title {
+  position: static !important;
+  transform: none !important;
+  text-align: left;
+  padding-left: 0;
+  margin-left: 2px;   /* 👈 same 2px spacing */
+  flex: 1;
+}
+
+/* Reduce back button padding */
+:host-context(.ios) .products-header ion-back-button {
+  --padding-start: 0px;
+  margin-left: 2px;
+}
+
+/* Hide "Back" text */
+:host-context(.ios) ion-back-button::part(text) {
+  display: none;
+}
+
+:host-context(.ios) .report-dropdown {
+  max-width: 140px;   /* 🔥 control width */
+  //font-size: 18px;    /* reduce size */
+}
+
+/* FIX: perfectly center icon inside circle */
+:host-context(.ios) .products-header ion-back-button::part(native) {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  padding: 0 !important;   /* 🔥 important */
+}
+
+/* Increase clickable area */
+:host-context(.ios) .products-header ion-back-button {
+  --padding-start: 6px;
+  --padding-end: 6px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+/* remove internal offset */
+:host-context(.ios) .products-header ion-back-button::part(icon) {
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: translateX(0px); /* reset iOS shift */
+  font-size: 20px;
+}

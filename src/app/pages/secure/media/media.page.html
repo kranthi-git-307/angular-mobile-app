@@ -1,0 +1,133 @@
+<ion-header class="media-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Media Library</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="media-content">
+
+  <!-- LOADING STATE -->
+  <div *ngIf="loading && mediaList.length === 0" class="loader-wrapper">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <!-- Pull to refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Media Grid -->
+  <div class="media-grid">
+    <div
+      class="media-item"
+      *ngFor="let m of mediaList"
+      (click)="selectMedia(m)"
+    >
+      <img [src]="m.source_url" />
+    </div>
+
+    <!-- Custom Item -->
+    <!-- <div class="media-item custom-item" (click)="openCamera()">
+      <ion-icon name="image-outline"></ion-icon>
+      <span>Add Media</span>
+    </div> -->
+  </div>
+
+  <!-- Infinite Scroll -->
+  <ion-infinite-scroll
+    threshold="100px"
+    (ionInfinite)="loadMedia($event)"
+    [disabled]="!hasMore">
+
+    <ion-infinite-scroll-content loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+
+  </ion-infinite-scroll>
+
+</ion-content>
+
+<!-- Floating Upload Button -->
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+
+  <!-- Main FAB -->
+   <input
+    type="file"
+    accept="image/*"
+    hidden  
+    #fileInput
+    (change)="onFileSelect($event)"
+  />
+  <ion-fab-button class="upload-fab">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+
+  <!-- FAB Options -->
+  <ion-fab-list side="top">
+
+    <!-- Camera -->
+    <ion-fab-button class="fab-action" (click)="openCamera()">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-fab-button>
+
+    <!-- Gallery -->
+    <!-- <ion-fab-button class="fab-action" (click)="openGallery()">
+      <ion-icon name="images-outline"></ion-icon>
+    </ion-fab-button> -->
+
+    <ion-fab-button class="fab-action" (click)="pickImage(fileInput, $event)">
+      <ion-icon name="images-outline"></ion-icon>
+    </ion-fab-button>
+
+  </ion-fab-list>
+
+</ion-fab>
+
+<!-- Modal -->
+<ion-modal 
+  [isOpen]="!!selectedMedia"
+  (didDismiss)="selectedMedia = null"
+  cssClass="custom-media-modal">
+
+  <ng-template>
+    <div class="media-popup">
+
+      <div class="popup-top">
+        <img class="popup-image"
+          [src]="selectedMedia?.source_url" />
+
+        <h2>{{ selectedMedia?.title?.rendered || 'Media Item' }}</h2>
+
+        <div class="file-delete-row">
+          <div class="file-name">
+            {{ selectedMedia?.source_url?.split('/').pop() }}
+          </div>
+
+          <ion-button
+            class="delete-btn"
+            fill="solid"
+            color="danger"
+            (click)="handleDelete(selectedMedia.id)">
+
+            
+            Delete
+          </ion-button>
+
+        </div>
+      </div>
+
+      <div class="popup-bottom">
+        <p>File type: {{ selectedMedia?.mime_type }}</p>
+
+        <a [href]="selectedMedia?.source_url" target="_blank">
+          {{ selectedMedia?.source_url }}
+        </a>
+      </div>
+
+    </div>
+  </ng-template>
+
+</ion-modal>

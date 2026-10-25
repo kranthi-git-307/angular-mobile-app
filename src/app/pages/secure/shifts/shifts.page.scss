@@ -1,0 +1,395 @@
+.shift-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  margin: 12px auto;           /* center card */
+  width: calc(100% - 24px);    /* equal space left & right */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+ion-content {
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+ion-content {
+  --background: #f6f6f6;
+}
+/* HEADER CONTAINER */
+.shift-header {
+  background: #264c73;
+  padding-bottom: 15px;   /* ⬅ increase blue height */
+
+  ion-toolbar {
+    --background: #264c73;
+    --color: #fff;
+    --padding-start: 0px;   /* reduces left space of toolbar */
+  }
+
+  ion-title {
+    padding-left: 0;
+    margin-left: -6px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+}
+/* Bigger back arrow */
+.back-icon {
+  font-size: 26px;   /* increase size */
+  color: #ffffff;
+}
+.custom-header {
+  --background: #264c73;
+  --color: white;
+  padding-bottom: 18px;
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 22px;
+}
+
+.custom-header ion-title {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+
+
+/* SEARCH CONTAINER */
+.search-container {
+  margin: 10px 10px;
+  background: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 8px 18px;
+  gap: 10px;
+
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Search icon */
+.search-container ion-icon {
+  color: #3b3b3b;
+  font-size: 25px;          /* slightly bigger */
+  opacity: 0.75;            /* softer like screenshot */
+}
+
+/* Input */
+.search-container input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #3b3b3b;
+  font-size: 18px;          /* bigger text */
+  font-weight: 400;         /* normal (not bold) */
+  outline: none;
+  letter-spacing: 0px;
+}
+
+/* Placeholder */
+.search-container input::placeholder {
+  color: #3b3b3b;
+  opacity: 0.55;            /* lighter than text */
+  font-weight: 400;
+  font-size: 17px; 
+}
+
+.shift-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shift-user {
+  display: flex;
+  align-items: center;
+}
+
+.shift-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-right: 10px;
+}
+
+.shift-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.shift-date {
+  font-size: 13px;
+  color: #777;
+}
+
+.shift-body {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.shift-bottom {
+  border-top: 1px solid #eee;
+  margin-top: 10px;
+  padding-top: 8px;
+  font-size: 13px;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+/* FILTER ICON */
+ion-toolbar ion-icon {
+  color: #ffffff;
+}
+
+/* TOP ROW */
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* USER SECTION */
+.user {
+  display: flex;
+  gap: 12px;
+}
+
+/* AVATAR */
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar.yellow { background: #f3b431; }
+.avatar.red { background: #f15b5b; }
+.avatar.teal { background: #4db6ac; }
+.avatar.orange { background: #f28b54; }
+.avatar.purple { background: #8b8ee8; }
+
+.avatar ion-icon {
+  font-size: 20px;
+  color: #fff;
+}
+
+
+/* NAME */
+.user h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color:#323641;
+}
+
+/* MUTED TEXT */
+.muted {
+  margin: 2px 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #4c5f7d;
+}
+
+.right {
+  text-align: right;
+  font-size: 13px;
+}
+
+.right-row {
+  display: grid;
+  grid-template-columns: 100px auto; /* fixed label width */
+  justify-content: end; /* align entire block to right */
+  margin: 2px 0;
+}
+
+/* Label */
+.right-row .label {
+  text-align: right;
+  color: #4c5f7d;
+  font-weight: 500;
+}
+
+/* Value */
+.right-row .amount {
+  text-align: left;
+  font-weight: 500;
+  color: #323641;
+  padding-left: 6px;
+}
+
+.date {
+  font-size: 12px;
+  font-weight:500px;
+  color: #373535;
+  margin-bottom: 4px;
+}
+
+/* DIVIDER */
+.divider {
+  height: 1px;
+  background: #eee;
+  margin: 8px 0;
+}
+
+.bottom-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #eef1f5;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Label style */
+.bottom-row .label {
+  font-weight: 400;
+  font-size: 12px;
+  color: #5f6373; /* lighter */
+}
+
+/* Value style */
+.bottom-row .value {
+  font-weight: 400;
+  font-size: 12px;
+  color: #323641; /* darker */
+  margin-left: 4px;
+}
+
+/* COLOR VARIANTS */
+.yellow {
+  border-bottom:  4px solid #f3b431;
+}
+
+.red {
+ border-bottom:  4px solid #f15b5b;
+}
+
+.teal {
+  border-bottom:  4px solid #4db6ac;
+}
+
+.orange {
+  border-bottom:  4px solid #f28b54;
+}
+
+.purple {
+  border-bottom:  4px solid #8b8ee8;
+}
+.amount {
+  font-size:13px;
+  font-weight: 500;   /* bold only value */
+  color: #323641;     /* slightly darker for emphasis */
+}
+
+ion-content h2 {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 5px 12px 5px 12px; /* top right bottom left */
+  color: #333;
+}
+
+///////page loading state///////
+
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  color: #666;
+}
+
+.loader-wrapper ion-spinner {
+  width: 40px;
+  height: 40px;
+}
+
+.loader-wrapper p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+/////////////////////////////////////////////
+
+/* iOS ONLY - Orders Header Fix */
+:host-context(.ios) .shift-header ion-toolbar {
+  display: flex;
+  align-items: center;
+}
+
+/* Fix back button spacing */
+:host-context(.ios) .shift-header ion-buttons[slot="start"] {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Remove iOS default title centering */
+:host-context(.ios) .shift-header ion-title {
+  position: static !important;
+  transform: none !important;
+  text-align: left;
+  padding-left: 0;
+  margin-left: 2px;   /* 👈 same 2px spacing */
+  flex: 1;
+}
+
+/* Reduce back button padding */
+:host-context(.ios) .shift-header ion-back-button {
+  --padding-start: 0px;
+  margin-left: 2px;
+}
+
+/* Hide "Back" text */
+:host-context(.ios) ion-back-button::part(text) {
+  display: none;
+}
+
+/* FIX: perfectly center icon inside circle */
+:host-context(.ios) .shift-header ion-back-button::part(native) {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  padding: 0 !important;   /* 🔥 important */
+}
+
+/* Increase clickable area */
+:host-context(.ios) .shift-header ion-back-button {
+  --padding-start: 6px;
+  --padding-end: 6px;
+  margin-left: 14px;
+  margin-right: 8px;
+}
+
+/* remove internal offset */
+:host-context(.ios) .shift-header ion-back-button::part(icon) {
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: translateX(0px); /* reset iOS shift */
+  font-size: 20px;
+}
+
+:host-context(.ios) .shift-header .search-container {
+  border-radius: 48px;
+  padding: 4px 14px;   /* 👈 top/bottom reduced */
+  margin-left: 12px;
+  margin-right: 12px;
+}
